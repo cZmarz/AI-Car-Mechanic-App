@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "AI Car Mechanic",
+    "slug": "ai-car-mechanic",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0F1115",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0F1115",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "AI Car Mechanic uses your microphone to record engine and car noises for diagnosis."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "AI Car Mechanic uses your photo library to set a profile picture."
+        }
+      ],
+      "expo-font",
+      "expo-asset"
+    ]
+  }
+}
