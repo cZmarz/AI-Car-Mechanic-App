@@ -146,3 +146,8 @@ Both `EXPO_PUBLIC_GROQ_API_KEY` and `EXPO_PUBLIC_GEMINI_API_KEY` get bundled int
 app and are visible to anyone who inspects it. Fine for local testing; before sharing
 a build with anyone else, put a tiny backend proxy in front of these APIs so the real
 keys never leave your server.
+
+## KNOWN ISSUES
+There is a tendency for the app to load analysis for a long time when uploading an audio recording.
+This happens when Gemini is under high load and the app will attempt re-upload the clip. Currently, 
+this feature is not as reliable as normal text input.
