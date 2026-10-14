@@ -2,10 +2,10 @@
 
 Mobile app: record a car noise, or type a description, and get back a ranked list of
 likely faults with confidence %, severity, UK repair cost estimate, safety notes, and
-evidence — all stored locally so you can browse past scans and manage multiple
+evidence  all stored locally so you can browse past scans and manage multiple
 vehicles in a garage.
 
-Built with Expo (React Native) + TypeScript. No backend — everything (vehicles, scan
+Built with Expo (React Native) + TypeScript. No backend everything (vehicles, scan
 history, settings, profile) is stored on-device via AsyncStorage. Two AI backends:
 Gemini for the experimental audio-based diagnosis, Groq for the typed-description
 diagnosis (see below).
@@ -81,19 +81,19 @@ npx eas build -p android --profile preview
 alongside the vehicle info, requesting a structured JSON diagnosis.
 
 **Describe**: type the symptom as text, sent to Groq (`llama`/`gpt-oss` class model)
-using the same JSON schema. This is the more reliable path — it's the same kind of
+using the same JSON schema. This is the more reliable path  it's the same kind of
 text-based diagnosis the very first version of this app shipped with, just now living
 inside the new Scan flow alongside audio.
 
 **Be clear-eyed about the audio path**: there is no free-tier API that does validated
 acoustic fault classification (e.g. reliably telling a worn brake pad squeal apart
-from a belt squeal from the waveform alone) — that requires a model trained on a
+from a belt squeal from the waveform alone)  that requires a model trained on a
 large labelled dataset of car fault sounds, which doesn't exist as an off-the-shelf
 service. Gemini is a general multimodal model, not a purpose-built diagnostic
 classifier, so its audio-based diagnosis is a best-effort guess, not a validated
 result. The prompt explicitly instructs it to stay conservative and honest about
 uncertainty, and the Results screen labels audio-sourced results as "Experimental
-audio analysis — treat as a rough guide" (text-sourced results get a milder
+audio analysis  treat as a rough guide" (text-sourced results get a milder
 "AI-generated diagnosis" label). Don't present either as more reliable than it is.
 
 ## Audio scans: cached immediately, retried until they succeed
@@ -103,9 +103,9 @@ non-issue:
 
 1. The instant you stop recording, the clip is copied out of the OS-managed cache
    directory into the app's permanent document directory (`src/services/audioCache.ts`)
-   — safe from being cleared under storage pressure — and a `PendingScan` is written
+    safe from being cleared under storage pressure  and a `PendingScan` is written
    to AsyncStorage *before any network call happens*.
-2. The actual retry loop lives in `AppDataContext`, not in `ProcessingScreen` — so it
+2. The actual retry loop lives in `AppDataContext`, not in `ProcessingScreen`  so it
    keeps running even if you navigate away from that screen, switch tabs, or the
    screen gets frozen by `react-native-screens`. It's tied to the app's root provider,
    which is always mounted for as long as the app process is alive.
@@ -114,7 +114,7 @@ non-issue:
    things like a missing/invalid API key are not, and surface immediately as a
    "Retry Scan" / "Discard" choice instead of looping forever.
 4. On relaunch, any recordings still pending (app was closed mid-retry) resume
-   automatically — nothing is silently lost.
+   automatically  nothing is silently lost.
 
 **The one real limit**: this only survives while the app process is alive (foreground
 or backgrounded-but-not-killed). True OS-level background retry after the app is
@@ -124,19 +124,19 @@ force-quit would need a native background task (e.g. via a custom dev client wit
 ## What's local-only (by design, for now)
 
 Vehicles, scan history, settings, and profile all live in AsyncStorage on the
-device — nothing is synced to a server, there's no login, and no backend exists.
+device  nothing is synced to a server, there's no login, and no backend exists.
 That means the following from the original feature list are intentionally **not**
 built yet, since they each require real infrastructure decisions:
 
-- **Nearby Garages** (needs a paid Maps/Places API key) — the "Find Garage" button
+- **Nearby Garages** (needs a paid Maps/Places API key)  the "Find Garage" button
   currently shows a "coming soon" message.
-- **Premium/Subscription/payments** — the Profile screen shows a "Free plan" stub;
+- **Premium/Subscription/payments**  the Profile screen shows a "Free plan" stub;
   wiring up real billing needs App Store/Play Store compliance work.
-- **Push notifications, server-triggered reminders (MOT/road tax/recalls)** — needs a
+- **Push notifications, server-triggered reminders (MOT/road tax/recalls)**  needs a
   backend to schedule and send them. The in-app notifications bell is currently a
   static placeholder.
-- **Admin Dashboard, user accounts/login** — needs a real backend, database, and auth.
-- **Emergency calling** — deliberately not built even as a stub; a real implementation
+- **Admin Dashboard, user accounts/login**  needs a real backend, database, and auth.
+- **Emergency calling**  deliberately not built even as a stub; a real implementation
   should only ever open the phone's own dialer (`tel:` link) for the user to confirm
   and place the call themselves, never dial automatically.
 
