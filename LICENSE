@@ -353,9 +353,10 @@ that material) supplement the terms of this License with terms:
     a) Disclaiming warranty or limiting liability differently from the
     terms of sections 15 and 16 of this License; or
 
-    b) Requiring preservation of specified reasonable legal notices or
-    author attributions in that material or in the Appropriate Legal
-    Notices displayed by works containing it; or
+    b)  any copy or modified version must preserve the 
+        attribution "Originally created by Chris Zmarzly
+        (github.com/cZmarz)" in the Appropriate Legal Notices shown in the app's
+        interface.
 
     c) Prohibiting misrepresentation of the origin of that material, or
     requiring that modified versions of such material be marked in
@@ -615,6 +616,9 @@ reviewing courts shall apply local law that most closely approximates
 an absolute waiver of all civil liability in connection with the
 Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
+
+
+
 
                      END OF TERMS AND CONDITIONS
 
